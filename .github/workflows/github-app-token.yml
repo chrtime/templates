@@ -14,7 +14,25 @@ jobs:
     name: Pass input and secrets to my-action
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/my-action
-        with:
-          username: ${{ inputs.username }}
-          token: ${{ secrets.token }}
+     # - uses: ./.github/workflows/my-action
+     #   with:
+     #     username: ${{ inputs.username }}
+     #     token: ${{ secrets.token }}
+
+      - name: Get token
+        env:
+          apps_id: ${{ inputs.apps_id }}
+          private_key: ${{ secrets.apps_private_key }}
+        run: | 
+          appsToken=$(ruby token.arb "$private_key" "$apps_id")
+          echo "$appsToken"
+
+          installToken=$(curl -s -X POST \
+            -H "Authorization: Bearer $appsToken" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/app/installations/25232808/access_tokens | jq .token)
+
+          echo "$installToken"
+          installToken=$(echo "${installToken:1:${#installToken}-2}")
+          echo "$installToken"
+          echo "app_token=$installToken" >> $GITHUB_ENV
