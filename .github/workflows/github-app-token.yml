@@ -1,0 +1,20 @@
+name: Generate github apps token
+on:
+  workflow_call:
+    inputs:
+      apps_id:
+        required: true
+        type: string
+    secrets:
+      apps_private_key:
+        required: true
+
+jobs:
+  example_job:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/my-action
+        with:
+          username: ${{ inputs.username }}
+          token: ${{ secrets.token }}
