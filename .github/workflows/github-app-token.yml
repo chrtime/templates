@@ -18,7 +18,11 @@ jobs:
      #   with:
      #     username: ${{ inputs.username }}
      #     token: ${{ secrets.token }}
-
+      - uses: actions/checkout@v3
+      
+      - name: check files
+        run: ls
+      
       - name: Get token
         env:
           apps_id: ${{ inputs.apps_id }}
