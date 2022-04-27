@@ -58,7 +58,8 @@ jobs:
           echo "testing appsInstallToken variable"
           echo "$appsInstallToken"
           # Trim quotes from the token
-          installToken=$(echo "${installToken:1:${#installToken}-2}")
+          installToken=$(echo "${appsInstallToken:1:${#appsInstallToken}-2}")
+          echo "testing trimmed token variable"
           echo "$installToken"
           # Return
           echo "::set-output name=token::$installToken"
