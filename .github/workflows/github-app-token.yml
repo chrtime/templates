@@ -31,7 +31,7 @@ jobs:
           apps_id: ${{ inputs.apps_id }}
           private_key: ${{ secrets.apps_private_key }}
         run: | 
-          appsAccessToken=$(ruby token.arb "$private_key" "$apps_id")
+          appsAccessToken=$(ruby token.rb "$private_key" "$apps_id")
           #echo "$appsAccessToken"
 
           appsInstallToken=$(curl -s -X POST \
