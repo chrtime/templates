@@ -5,6 +5,9 @@ on:
       apps_id:
         required: true
         type: string
+      install_id:
+        required: true
+        type: string
     secrets:
       apps_private_key:
         required: true
@@ -32,6 +35,7 @@ jobs:
         id: token-job
         env:
           apps_id: ${{ inputs.apps_id }}
+          install_id: ${{ inputs.install_id }}
           private_key: ${{ secrets.apps_private_key }}
         run: | 
           jq --version
