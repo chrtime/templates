@@ -45,7 +45,7 @@ jobs:
           #echo "$appsInstallToken"
           # Trim quotes from the token
           installToken=$(echo "${installToken:1:${#installToken}-2}")
-          echo "installToken
+          echo "$installToken"
           # Return
           echo "::set-output name=token::$installToken"
           #echo "app_token=$appsInstallToken" >> $GITHUB_ENV
