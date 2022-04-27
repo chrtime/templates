@@ -16,7 +16,8 @@ on:
         description: "Returning a usable install token that can be used to authenticate to the Github API"
         value: ${{ jobs.token.token-output }}
       nottoken:
-        value: ${{ jobs.token.test-out }}
+        descripton: "fixed value"
+        value: "TEEEEST
 
 jobs:
   token:
