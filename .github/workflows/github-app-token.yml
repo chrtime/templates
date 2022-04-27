@@ -9,16 +9,19 @@ on:
       apps_private_key:
         required: true
     outputs:
-      github_apps_install_token:
+      token:
         description: "Returning a usable install token that can be used to authenticate to the Github API"
         value: ${{ jobs.token.token-output }}
+      nottoken:
+        value: ${{ jobs.token.test-out }}
 
 jobs:
   token:
     name: generate install token
     runs-on: ubuntu-latest
     outputs:
-      token-output: ${{ steps.token-job.outputs.appsInstallToken }}
+      token-output: ${{ steps.token-job.outputs.token }}
+      test-out: "test from external workflow"
     steps:
       - uses: actions/checkout@v3
       
@@ -42,7 +45,7 @@ jobs:
           #echo "$appsInstallToken"
           # Trim quotes from the token
           installToken=$(echo "${installToken:1:${#installToken}-2}")
-          
+          echo "installToken
           # Return
-          echo "::set-output name=appsInstallToken::$installToken"
+          echo "::set-output name=token::$installToken"
           #echo "app_token=$appsInstallToken" >> $GITHUB_ENV
